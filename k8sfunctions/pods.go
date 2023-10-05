@@ -29,6 +29,8 @@ func GetPods(clientset *kubernetes.Clientset, namespace string, status string) e
 		return err
 	}
 
+	fmt.Println(len(pods.Items))
+
 	for _, p := range pods.Items {
 		// if string(p.Status.Phase) == status {
 		fmt.Printf("%s - %s\n", p.ObjectMeta.Namespace, p.ObjectMeta.Name)

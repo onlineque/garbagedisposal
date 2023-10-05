@@ -2,11 +2,11 @@ package k8sfunctions
 
 import (
 	"context"
-	"fmt"
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
+	"slices"
 )
 
 func InitAPIAccess() (*kubernetes.Clientset, error) {
@@ -23,7 +23,7 @@ func InitAPIAccess() (*kubernetes.Clientset, error) {
 	return clientset, nil
 }
 
-func GetPods(clientset *kubernetes.Clientset, namespace string, status string) ([]v1.Pod, error) {
+func GetPods(clientset *kubernetes.Clientset, namespace string, statusList []string) ([]v1.Pod, error) {
 	var result []v1.Pod
 
 	pods, err := clientset.CoreV1().Pods(namespace).List(context.TODO(), metav1.ListOptions{})
@@ -31,10 +31,9 @@ func GetPods(clientset *kubernetes.Clientset, namespace string, status string) (
 		return nil, err
 	}
 
-	fmt.Println("pod count: ", len(pods.Items))
-
 	for _, p := range pods.Items {
-		if string(p.Status.Phase) == status {
+		if slices.Contains(statusList, string(p.Status.Phase)) {
+			// if string(p.Status.Phase) == status {
 			result = append(result, p)
 		}
 	}

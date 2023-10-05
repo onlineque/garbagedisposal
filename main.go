@@ -12,11 +12,12 @@ func main() {
 		log.Fatal("Error initializing API:", err)
 	}
 
+	statusList := []string{"Succeeded", "Failed"}
+
 	for {
-		// once per minute
 		time.Sleep(1 * time.Minute)
 
-		pods, err := k8sfunctions.GetPods(clientset, "", "Succeeded")
+		pods, err := k8sfunctions.GetPods(clientset, "", statusList)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -25,7 +26,8 @@ func main() {
 			namespace := pods[pod].ObjectMeta.Namespace
 			podName := pods[pod].ObjectMeta.Name
 			age := pods[pod].CreationTimestamp.Time
-			log.Printf("%s - %s (%v)\n", namespace, podName, age)
+			status := pods[pod].Status
+			log.Printf("Terminating pod %s - %s (%v), status: \n", namespace, podName, age, status)
 			err := k8sfunctions.TerminatePod(clientset, namespace, podName)
 			if err != nil {
 				log.Println(err)

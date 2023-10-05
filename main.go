@@ -10,5 +10,5 @@ func main() {
 	if err != nil {
 		log.Fatal("Error initializing API:", err)
 	}
-	err = k8sfunctions.GetPods(clientset, "*", "Completed")
+	err = k8sfunctions.GetPods(clientset, "", "Completed")
 }

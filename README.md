@@ -1,7 +1,7 @@
 # garbagedisposal
 
 
-This small project terminates Kubernetes pods in Succeeded and Failed status. It inspects all cluster pods each minute
+This small project terminates Kubernetes pods in Succeeded or Failed status. It inspects all cluster pods each minute
 and terminates found pods immediately.
 
 ## Installation

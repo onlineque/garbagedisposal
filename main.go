@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"garbagedisposal/k8sfunctions"
 	"log"
 )
@@ -10,8 +11,12 @@ func main() {
 	if err != nil {
 		log.Fatal("Error initializing API:", err)
 	}
-	err = k8sfunctions.GetPods(clientset, "", "Succeeded")
+	pods, err := k8sfunctions.GetPods(clientset, "", "Succeeded")
 	if err != nil {
 		log.Fatal(err)
+	}
+
+	for pod := range pods {
+		fmt.Println(pod)
 	}
 }

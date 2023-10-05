@@ -26,7 +26,7 @@ func main() {
 			namespace := pods[pod].ObjectMeta.Namespace
 			podName := pods[pod].ObjectMeta.Name
 			age := pods[pod].CreationTimestamp.Time
-			status := pods[pod].Status
+			status := pods[pod].Status.Phase
 			log.Printf("Terminating pod %s - %s (%v), status: \n", namespace, podName, age, status)
 			err := k8sfunctions.TerminatePod(clientset, namespace, podName)
 			if err != nil {

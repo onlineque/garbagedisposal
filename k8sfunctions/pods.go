@@ -14,6 +14,7 @@ func InitAPIAccess() (*kubernetes.Clientset, error) {
 		return nil, err
 	}
 	clientset, err := kubernetes.NewForConfig(config)
+
 	if err != nil {
 		return nil, err
 	}
@@ -29,7 +30,7 @@ func GetPods(clientset *kubernetes.Clientset, namespace string, status string) e
 		return err
 	}
 
-	fmt.Println(len(pods.Items))
+	fmt.Println("pod count: ", len(pods.Items))
 
 	for _, p := range pods.Items {
 		// if string(p.Status.Phase) == status {

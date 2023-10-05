@@ -11,4 +11,7 @@ func main() {
 		log.Fatal("Error initializing API:", err)
 	}
 	err = k8sfunctions.GetPods(clientset, "kube-system", "Completed")
+	if err != nil {
+		log.Fatal("Error getting list of pods: ", err)
+	}
 }

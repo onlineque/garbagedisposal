@@ -24,7 +24,8 @@ func main() {
 		for pod := range pods {
 			namespace := pods[pod].ObjectMeta.Namespace
 			podName := pods[pod].ObjectMeta.Name
-			log.Printf("%s - %s\n", pods[pod].ObjectMeta.Namespace, pods[pod].ObjectMeta.Name)
+			age := pods[pod].CreationTimestamp.Time
+			log.Printf("%s - %s (%v)\n", namespace, podName, age)
 			err := k8sfunctions.TerminatePod(clientset, namespace, podName)
 			if err != nil {
 				log.Println(err)

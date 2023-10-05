@@ -3,9 +3,9 @@ kind: ClusterRole
 metadata:
   name: garbagedisposal
   namespace: {{ .Release.Namespace | quote }}
-rules:          # Authorization rules for this role
-  - apiGroups:  # 1st API group
-      - apps    # An empty string designates the core API group.
+rules:
+  - apiGroups:
+      - "*"
     resources:
       - pods
     verbs:

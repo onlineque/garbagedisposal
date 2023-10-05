@@ -12,6 +12,6 @@ func main() {
 	}
 	err = k8sfunctions.GetPods(clientset, "kube-system", "Completed")
 	if err != nil {
-		log.Fatal("Error getting list of pods: ", err)
+		log.Fatal(err)
 	}
 }

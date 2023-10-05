@@ -39,7 +39,7 @@ func GetPods(clientset *kubernetes.Clientset, namespace string, status string) (
 		}
 	}
 
-	return result, nil
+	return pods.Items, nil
 }
 
 /*

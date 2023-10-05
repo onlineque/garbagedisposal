@@ -23,11 +23,17 @@ func InitAPIAccess() (*kubernetes.Clientset, error) {
 
 func GetPods(clientset *kubernetes.Clientset, namespace string, status string) error {
 	fmt.Println(status)
+
 	pods, err := clientset.CoreV1().Pods(namespace).List(context.TODO(), metav1.ListOptions{})
 	if err != nil {
 		return err
 	}
-	fmt.Println(pods)
+
+	for _, p := range pods.Items {
+		if string(p.Status.Phase) == status {
+			fmt.Printf("%s - %s\n", p.ObjectMeta.Namespace, p.ObjectMeta.Name)
+		}
+	}
 
 	return nil
 }

@@ -42,8 +42,6 @@ func GetPods(clientset *kubernetes.Clientset, namespace string, status string) (
 	return result, nil
 }
 
-/*
 func TerminatePod(clientset *kubernetes.Clientset, namespace string, pod string) error {
-	return nil
+	return clientset.CoreV1().Pods(namespace).Delete(context.TODO(), pod, metav1.DeleteOptions{})
 }
-*/

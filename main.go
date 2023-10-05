@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"garbagedisposal/k8sfunctions"
 	"log"
 )
@@ -18,6 +17,12 @@ func main() {
 	}
 
 	for pod := range pods {
-		fmt.Printf("%s - %s\n", pods[pod].ObjectMeta.Namespace, pods[pod].ObjectMeta.Name)
+		namespace := pods[pod].ObjectMeta.Namespace
+		podName := pods[pod].ObjectMeta.Name
+		log.Printf("%s - %s\n", pods[pod].ObjectMeta.Namespace, pods[pod].ObjectMeta.Name)
+		err := k8sfunctions.TerminatePod(clientset, namespace, podName)
+		if err != nil {
+			log.Println(err)
+		}
 	}
 }

@@ -60,3 +60,7 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+garbagedisposal:
+  succeededAge: 1m
+  failedAge: 1m

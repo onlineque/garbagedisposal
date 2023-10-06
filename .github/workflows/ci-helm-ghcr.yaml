@@ -9,7 +9,7 @@ on:
   pull_request:
 env:
   CHART_NAME: garbagedisposal
-  IMAGE_TAG: ${{ github.ref }}
+  IMAGE_TAG: ${{ github.ref_name }}
 jobs:
   job:
     runs-on: ubuntu-latest

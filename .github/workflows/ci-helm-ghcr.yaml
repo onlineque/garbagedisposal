@@ -5,7 +5,7 @@ permissions:
 on:
   push:
     # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
+    tags: [ '*.*.*' ]
   pull_request:
 env:
   CHART_NAME: garbagedisposal

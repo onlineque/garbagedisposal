@@ -7,10 +7,8 @@ on:
       # you'll get a new Helm Chart version commit for every single commit into
       # your branch. It would be very noisy.
       - '!*'
-    tags:
-      # Trigger this on the tag format that your developers are using for the
-      # core application/docker-image tag.
-      - v*
+    tags: [ '*.*.*' ]
+
 jobs:
   release:
     runs-on: ubuntu-latest

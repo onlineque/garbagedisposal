@@ -17,10 +17,6 @@ jobs:
         with:
           fetch-depth: '0'  # this is important for the git writeback
 
-      - name: Retag Docker Image for Production
-        uses: Nextdoor/docker-image-retag-action@main
-          ...
-
       - name: Update Helm Chart Values
         uses: Nextdoor/helm-set-image-tag-action@main
         with:
@@ -37,7 +33,7 @@ jobs:
           # multiple keys here only makes sense if you use the image tag value in
           # multiple places inside your chart.
           #
-          # tag_keys: .image.tag
+          tag_keys: .image.tag
 
           # This is the value that will be set in the Values files on the Tag
           # Keys (see above). If this build is running on git tag `v1.2.3` and your
@@ -50,7 +46,7 @@ jobs:
           # `major`, `minor`, `path` or `null` are allowed. If you set `null` then
           # it will skip bumping the version.
           #
-          # bump_level: patch
+          bump_level: patch
 
           # `true` or `false` - whether or not to run the helm-docs generator.
           #

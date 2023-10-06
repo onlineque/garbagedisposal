@@ -51,7 +51,7 @@ func main() {
 			age := time.Now().Sub(pods[pod].CreationTimestamp.Time)
 			status := pods[pod].Status.Phase
 			if (status == "Succeeded" && age >= succeededAgeDuration) || (status == "Failed" && age >= failedAgeDuration) {
-				log.Printf("Terminating pod %s from %s namespace (%v), status: %s\n", podName, namespace, age,
+				log.Printf("Terminating pod %s from %s namespace, age: %v, status: %s\n", podName, namespace, age,
 					status)
 				err := k8sfunctions.TerminatePod(clientset, namespace, podName)
 				if err != nil {

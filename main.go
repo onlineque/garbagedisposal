@@ -25,7 +25,7 @@ func main() {
 		for pod := range pods {
 			namespace := pods[pod].ObjectMeta.Namespace
 			podName := pods[pod].ObjectMeta.Name
-			age := pods[pod].CreationTimestamp.Time
+			age := time.Now().Sub(pods[pod].CreationTimestamp.Time)
 			status := pods[pod].Status.Phase
 			log.Printf("Terminating pod %s from %s namespace (%v), status: %s\n", podName, namespace, age,
 				status)

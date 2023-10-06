@@ -19,7 +19,7 @@ jobs:
           fetch-depth: '0'  # this is important for the git writeback
 
       - name: Retag Docker Image for Production
-        uses: Nextdoor/docker-image-retag-action@v0.1.0
+        uses: Nextdoor/docker-image-retag-action@main
           ...
 
       - name: Update Helm Chart Values
